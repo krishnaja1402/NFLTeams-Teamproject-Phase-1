@@ -1,0 +1,22 @@
+@using NFLTeams.Models
+@model Team
+
+<h2>Delete Team</h2>
+
+<div class="alert alert-warning">
+    Are you sure you want to delete <strong>@Model.Name</strong>?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-2">Conference</dt>
+    <dd class="col-sm-10">@Model.Conference.Name</dd>
+
+    <dt class="col-sm-2">Division</dt>
+    <dd class="col-sm-10">@Model.Division.Name</dd>
+</dl>
+
+<form action="/Admin/Teams/DeleteConfirmed" method="post">
+    <input type="hidden" asp-for="TeamID" />
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

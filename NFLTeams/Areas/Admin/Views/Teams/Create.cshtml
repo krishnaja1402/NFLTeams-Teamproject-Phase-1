@@ -1,0 +1,39 @@
+@using NFLTeams.Models
+@model Team
+
+<h2>Add New Team</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label>Team ID</label>
+        <input asp-for="TeamID" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Logo Image Filename</label>
+        <input asp-for="LogoImage" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Conference</label>
+        <select name="ConferenceID" class="form-control">
+            @foreach (var c in (List<Conference>)ViewBag.Conferences)
+            {
+                <option value="@c.ConferenceID">@c.Name</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Division</label>
+        <select name="DivisionID" class="form-control">
+            @foreach (var d in (List<Division>)ViewBag.Divisions)
+            {
+                <option value="@d.DivisionID">@d.Name</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

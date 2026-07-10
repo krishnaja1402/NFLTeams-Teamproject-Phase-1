@@ -1,0 +1,51 @@
+@using NFLTeams.Models
+@model Team
+
+<h2>Edit Team</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="TeamID" />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Logo Image Filename</label>
+        <input asp-for="LogoImage" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Conference</label>
+        <select name="ConferenceID" class="form-control">
+            @foreach (var c in (List<Conference>)ViewBag.Conferences)
+            {
+                @if (c.ConferenceID == Model.Conference.ConferenceID)
+                {
+                    <option value="@c.ConferenceID" selected>@c.Name</option>
+                }
+                else
+                {
+                    <option value="@c.ConferenceID">@c.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Division</label>
+        <select name="DivisionID" class="form-control">
+            @foreach (var d in (List<Division>)ViewBag.Divisions)
+            {
+                @if (d.DivisionID == Model.Division.DivisionID)
+                {
+                    <option value="@d.DivisionID" selected>@d.Name</option>
+                }
+                else
+                {
+                    <option value="@d.DivisionID">@d.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
