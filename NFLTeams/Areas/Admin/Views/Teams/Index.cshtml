@@ -1,0 +1,31 @@
+@using NFLTeams.Models
+@model List<Team>
+    
+<h2>Manage Teams</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Add New Team</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Conference</th>
+            <th>Division</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in Model)
+        {
+            <tr>
+                <td>@team.Name</td>
+                <td>@team.Conference.Name</td>
+                <td>@team.Division.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@team.TeamID" class="btn btn-sm btn-secondary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@team.TeamID" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
