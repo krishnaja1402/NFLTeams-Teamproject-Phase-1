@@ -3,7 +3,10 @@
 }
 
 <header class="text-center text-white">
-    <h1 class="bg-dark mt-3 p-3">NFL Teams — Admin Panel</h1>
+    <h1 class="bg-dark mt-3 p-3">
+        NFL Teams — Admin Panel
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-light btn-sm float-end mt-2 me-3">Back to Site</a>
+    </h1>
 
     @* show any message in TempData *@
     @if (TempData.Keys.Contains("message"))
