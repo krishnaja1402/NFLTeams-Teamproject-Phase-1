@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<header class="text-center text-white">
+    <h1 class="bg-primary mt-3 p-3">NFL Teams</h1>
+
+    @* show any message in TempData *@
+    @if (TempData.Keys.Contains("message"))
+    {
+        <h4 class="bg-success p-2">@TempData["message"]</h4>
+    }
+</header>
+<main>
+    @RenderBody()
+</main>
