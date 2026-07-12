@@ -35,8 +35,17 @@ namespace NFLTeams.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Team team, string ConferenceID, string DivisionID)
         {
+            if (string.IsNullOrWhiteSpace(team.TeamID))
+            {
+                ModelState.AddModelError("TeamID", "Team ID is required.");
+                ViewBag.Conferences = context.Conferences.ToList();
+                ViewBag.Divisions = context.Divisions.ToList();
+                return View(team);
+            }
+
             team.Conference = context.Conferences.Find(ConferenceID);
             team.Division = context.Divisions.Find(DivisionID);
+
             context.Teams.Add(team);
             context.SaveChanges();
             TempData["message"] = $"{team.Name} was added successfully";
@@ -50,8 +59,10 @@ namespace NFLTeams.Areas.Admin.Controllers
                 .Include(t => t.Conference)
                 .Include(t => t.Division)
                 .FirstOrDefault(t => t.TeamID == id);
+
             if (team == null)
                 return RedirectToAction("Index");
+
             ViewBag.Conferences = context.Conferences.ToList();
             ViewBag.Divisions = context.Divisions.ToList();
             return View(team);
@@ -62,6 +73,7 @@ namespace NFLTeams.Areas.Admin.Controllers
         {
             team.Conference = context.Conferences.Find(ConferenceID);
             team.Division = context.Divisions.Find(DivisionID);
+
             context.Teams.Update(team);
             context.SaveChanges();
             TempData["message"] = $"{team.Name} was updated successfully";
@@ -75,8 +87,10 @@ namespace NFLTeams.Areas.Admin.Controllers
                 .Include(t => t.Conference)
                 .Include(t => t.Division)
                 .FirstOrDefault(t => t.TeamID == id);
+
             if (team == null)
                 return RedirectToAction("Index");
+
             return View(team);
         }
 
